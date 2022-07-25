@@ -20,7 +20,7 @@ export const lambdaHandlerSort = async (event: APIGatewayProxyEvent): Promise<AP
         response = {
             statusCode: 200,
             body: JSON.stringify({
-                message: 'hello world',
+                message: 'Sort with merge sort',
                 body: MergeSort(params)
             }),
         };
