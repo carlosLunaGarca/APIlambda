@@ -15,13 +15,18 @@ import { MergeSort } from '../functions/MergeSort';
 
 export const lambdaHandlerSort = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     let response: APIGatewayProxyResult;
+    
     try {
-        const params: DataArray= JSON.parse(event.body);
+    
+        const params: DataArray= JSON.parse(event.body!);
+       const sort=new MergeSort(params.DataList);
+        sort.Sort(params.DataList, 0, params.DataList.length - 1,sort.indexes)
+        
         response = {
             statusCode: 200,
             body: JSON.stringify({
                 message: 'Sort with merge sort',
-                body: MergeSort(params)
+                body: params
             }),
         };
     } catch (err) {
