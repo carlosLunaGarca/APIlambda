@@ -1,27 +1,40 @@
 /* eslint-disable prettier/prettier */
-import { DataArray } from './../schemas/SchemaArray';
-export function MergeSort(params: DataArray) {
-    console.log(JSON.stringify(params)+" entrada del API");
-    Sort(params.DataList, 0, params.DataList.length - 1)
+import { dataIndex } from './../schemas/PositionData';
+export class MergeSort  {
+     indexes!: dataIndex[];
+
     
-    
-    return params;
+constructor(array:number[]){
+    console.log(array);
+    this.indexes= new Array(array.length);
+for(let i=0;i < array.length;i++){
+    this.indexes[i]={
+        data: array[i]+"",
+        index:i
+    }
 }
 
-function Merge(array:number[],l:number,m:number,r:number) {
+
+}
+ Merge(array:number[],l:number,m:number,r:number,indexes:dataIndex[]) {
     const n1 =Math.round( m - l + 1);
     const n2 = Math.round(r - m);
 
         /* Create temp arrays */
-        let L  = new Array(n1);
-        let R  = new Array(n2);
-  
+        const L  = new Array(n1);
+        const Lindex = new Array(n1)
+
+        const R  = new Array(n2);
+        const Rindex = new Array(n2)
         /*Copy data to temp arrays*/
         for (let i = 0; i < n1; ++i){
             L[i] = array[l + i];
+            Lindex[i]=indexes[l+i]
+
         }
         for (let j = 0; j < n2; ++j){
             R[j] = array[m + 1 + j];
+            Rindex[j]=indexes[m+1+j]
         }
   
         /* Merge the temp arrays */
@@ -34,10 +47,12 @@ function Merge(array:number[],l:number,m:number,r:number) {
         while (i < n1 && j < n2) {
             if (L[i] <= R[j]) {
                 array[k] = L[i];
+                indexes[k]=Lindex[i]
                 i++;
             }
             else {
                 array[k] = R[j];
+                indexes[k]=Rindex[j]
                 j++;
             }
             k++;
@@ -46,6 +61,7 @@ function Merge(array:number[],l:number,m:number,r:number) {
         /* Copy remaining elements of L[] if any */
         while (i < n1) {
             array[k] = L[i];
+            indexes[k]=Lindex[i]
             i++;
             k++;
         }
@@ -53,19 +69,22 @@ function Merge(array:number[],l:number,m:number,r:number) {
         /* Copy remaining elements of R[] if any */
         while (j < n2) {
             array[k] = R[j];
+            indexes[k]=Rindex[j]
             j++;
             k++;
         }
 }
 
-function Sort(array:number[],l:number,r:number) {
+ Sort(array:number[],l:number,r:number,indexes:dataIndex[]) {
     if(l<r){
 
         const m=Math.floor(l+(r-l)/2);
 
-        Sort(array,l,m);
-        Sort(array,m+1,r);
+        this.Sort(array,l,m,indexes);
+        this.Sort(array,m+1,r,indexes);
 
-        Merge(array,l,m,r);
+        this.Merge(array,l,m,r,indexes);
     }
+}
+
 }

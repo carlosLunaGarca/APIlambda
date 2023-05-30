@@ -107,3 +107,26 @@
       272
    ]
 }
+
+## METHOD Binary search
+
+>POST: https://lez7vkgof4.execute-api.us-east-1.amazonaws.com/Prod/search/integer
+
+>{
+  "ArrayData": [ 94, 136, 2, 206, 88, 76, 287, 187, 225, 10, 291, 153, 219, 55, 280, 274, 33, 173, 250, 257, 180, 18, 61, 102, 188, 166, 204, 164, 42, 126, 58, 164, 35, 258, 290, 125, 188, 197, 230, 162, 280, 28, 87, 128, 73, 97, 198, 277, 87, 62, 204, 146, 189, 290, 236, 99, 121, 204, 200, 88, 51, 153, 108, 32, 41, 253, 231, 277, 202, 293, 184, 245, 158, 0, 208, 150, 193, 32, 68, 129, 22, 150, 56, 80, 272, 199, 195, 81, 26, 19, 190, 63, 85, 179, 213, 49, 241, 93, 134, 272 ] ,
+  "search": 10,
+  "sort":false
+}
+
+>RESPONSE IF SORT IS TRUE: `{
+    "message": "Search with binary search",
+    "body": {
+        "data": "10",
+        "index": 9
+    }
+}`
+
+>RESPONSE IF SORT IS FALSE: `{
+    "message": "Search with binary search",
+    "body": 88
+}`
